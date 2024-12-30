@@ -2,4 +2,4 @@ from enum import Enum
 
 
 class Profile(Enum):
-    KindlePaperWhite = "KPW6"
+    KindlePaperWhite = "KPW5"

@@ -33,5 +33,5 @@ def get_info(manga_id, lang):
 
 
 if __name__ == "__main__":
-    build_manga("d8a959f7-648e-4c8d-8f23-f1f3f8e129f3", "en")
+    build_manga("41833997-4ce8-4154-808b-7b1602569e80", "pt-br")
     #get_info("d8a959f7-648e-4c8d-8f23-f1f3f8e129f3", "en")

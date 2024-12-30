@@ -11,6 +11,10 @@ class KccEpubBuilder:
         self.manga = manga
         self.volumes = volumes
 
+    def fix_file_naming(self, name):
+        return name.replace(":", "").replace("\\", "").replace("/", "").replace("*", "").replace(">", "").replace("<", "").replace("|", "").replace("?", "").replace('"', "")
+
+
     def build(self, profile: Profile, output_path: str):
         for volume in self.volumes:
             print("Volume: ", volume.number, "Cover:", bool(volume.cover))
@@ -26,7 +30,7 @@ class KccEpubBuilder:
 
             for chapter in volume.chapters:
                 if chapter.title:
-                    chapter_path = os.path.join(workdir, f"{chapter.get_number()} - {chapter.title}")
+                    chapter_path = os.path.join(workdir, f"{chapter.get_number()} - {self.fix_file_naming(chapter.title)}")
                 else:
                     chapter_path = os.path.join(workdir, str(chapter.get_number()))
 
@@ -36,7 +40,8 @@ class KccEpubBuilder:
 
             make_ebook([
                 "--profile", profile.value,
-                "--hq",
+                # "--hq",
+                "-m",
                 "--upscale",
                 "--title", f"{self.manga.title} - {volume.number}",
                 "--author", self.manga.author,

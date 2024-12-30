@@ -27,7 +27,7 @@ class MangaDexApi(BaseAPI):
 
         return Manga(
             id=data.id,
-            title=self._fix_titles(data.title, data.altTitles)[self._lang],
+            title=self._fix_titles(data.title, data.altTitles).get(self._lang, "Sem título"), 
             description=data.description[self._lang],
             author=data.author.name,
             language=self._lang,
@@ -61,7 +61,7 @@ class MangaDexApi(BaseAPI):
                     id=d.id,
                     chapter=safe(float, d.chapter),
                     volume=safe(int, d.volume),
-                    title=d.title,
+                    title=d.title.strip(),
                 ))
                 for d in data
                 if d.translatedLanguage == self._lang and d.externalUrl is None
